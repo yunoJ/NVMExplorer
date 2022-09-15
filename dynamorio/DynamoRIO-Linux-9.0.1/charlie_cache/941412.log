@@ -1,0 +1,29 @@
+Cache simulation results:
+Core #0 (1 thread(s))
+  L1I stats:
+    Hits:                          110,664
+    Misses:                          5,391
+    Compulsory misses:               2,490
+    Invalidations:                       0
+    Miss rate:                        4.65%
+  L1D stats:
+    Hits:                           42,428
+    Misses:                          2,561
+    Compulsory misses:               2,376
+    Invalidations:                       0
+    Prefetch hits:                     639
+    Prefetch misses:                 2,187
+    Miss rate:                        5.69%
+Core #1 (0 thread(s))
+Core #2 (0 thread(s))
+Core #3 (0 thread(s))
+LL stats:
+    Hits:                            4,271
+    Misses:                          3,681
+    Compulsory misses:               4,861
+    Invalidations:                       0
+    Prefetch hits:                   1,007
+    Prefetch misses:                 1,180
+    Local miss rate:                 46.29%
+    Child hits:                    153,731
+    Total miss rate:                  2.28%
