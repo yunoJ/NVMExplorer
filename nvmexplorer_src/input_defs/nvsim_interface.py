@@ -4,13 +4,15 @@ from nvmexplorer_src.input_defs.cell_cfgs import *
 
 class NVSimInputConfig:
   def __init__(self,
-                mem_cfg_file_path="../../data/mem_cfgs/test_SRAM.cfg", #path to nvsim cfg input
+    exp_name='default',
+    mem_cfg_file_path="../../data/mem_cfgs/test_SRAM.cfg", #path to nvsim cfg input
 		process_node=45, #chosen node in nm
 		opt_target="ReadLatency", #optimization target
 		word_width=64, #word width in bits
 		capacity=4, #capacity in MB
 		cell_type=SRAMCellConfig() #pass the cell configuration
 		):
+    self.exp_name = exp_name
     self.mem_cfg_file_path = mem_cfg_file_path
     self.process_node = process_node
     self.opt_target = opt_target
@@ -76,7 +78,7 @@ class NVSimOutputConfig: #initialized to 16nm SRAM, 4MB
     print("Area (mm^2): %f" % self.area)
     print("Area Efficiency (percent): %f" % self.area_efficiency)
 
-def parse_nvsim_output(filepath='output_examples/sram_0', input_cfg=NVSimInputConfig()):
+def parse_nvsim_output(exp_name, filepath='output_examples/sram_0', input_cfg=NVSimInputConfig()):
   """ Returns a :class:`NVSimOutputConfig` object which gets populated with the output results in
   parsed from file_path. 
 
@@ -88,7 +90,7 @@ def parse_nvsim_output(filepath='output_examples/sram_0', input_cfg=NVSimInputCo
   :rtype: :class:`NVSimOutputConfig`
   """
   #initialize base
-  base = NVSimOutputConfig(input_cfg=input_cfg)
+  base = NVSimOutputConfig(exp_name=exp_name, input_cfg=input_cfg)
 
   with open(filepath, 'r') as f:
     lines = f.readlines()

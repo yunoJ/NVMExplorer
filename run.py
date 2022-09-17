@@ -88,7 +88,7 @@ def run_nvsim(output_paths, log_dir, stdout_logs, stderr_logs, nvsim_path, cfg_p
   
   nvsim_outputs = []
   for i in range(len(output_paths)):
-    nvsim_output = nvmexplorer_src.input_defs.nvsim_interface.parse_nvsim_output(stdout_logs[i], input_cfg=nvsim_input_cfgs[i])
+    nvsim_output = nvmexplorer_src.input_defs.nvsim_interface.parse_nvsim_output(exp_name, stdout_logs[i], input_cfg=nvsim_input_cfgs[i])
     nvsim_output.print_summary()
     if not os.path.exists(output_dir): 
       os.makedirs(output_dir)
@@ -105,16 +105,16 @@ def run_nvsim(output_paths, log_dir, stdout_logs, stderr_logs, nvsim_path, cfg_p
 if __name__ == '__main__':
   
   exp_name = "default"
-  read_frequency = 100000
-  read_size = 8
-  write_frequency = 10
-  write_size = 8
-  working_set = 1
+  read_frequency = 100000 # number of [reads/s]
+  read_size = 8 # size/read [bytes]
+  write_frequency = 10 # number of [writes/s]
+  write_size = 8 # size/write [bytes]
+  working_set = 1 # total working set size [MB}]
   cell_type = ["SRAM"]
-  process_node = 22
+  process_node = 22 # size of process [nm]
   opt_target = ["ReadLatency"]
-  word_width = 64
-  capacity = 1
+  word_width = 64 # [bits]
+  capacity = 1 # [MB]
   bits_per_cell = [1]
   traffic = []
   nvsim_path = "nvmexplorer_src/nvsim/nvsim"
@@ -175,7 +175,7 @@ if __name__ == '__main__':
       cell_tentpoles = False
    
   print("Successfully Loaded Config File")
-  
+
   # The main loop of NVMExplorer
   for _cell_type in cell_type:
       for _opt_target in opt_target:
@@ -221,13 +221,17 @@ if __name__ == '__main__':
                       worst_case_stderr_log = "{}/logs/{}_{}MB_{}_{}BPC-worst_case_error".format(output_path, _cell_type, _capacity, _opt_target, _bits_per_cell)
 
                       ## Generate corresponding mem cfgs
-                      nvsim_best_case_input_cfg = nvmexplorer_src.input_defs.nvsim_interface.NVSimInputConfig(mem_cfg_file_path = best_case_cfg_path, process_node = process_node,
+                      nvsim_best_case_input_cfg = nvmexplorer_src.input_defs.nvsim_interface.NVSimInputConfig(exp_name = exp_name,
+                                                       mem_cfg_file_path = best_case_cfg_path, 
+                                                       process_node = process_node,
                                                        opt_target = _opt_target,
                                                        word_width = word_width,
                                                        capacity = _capacity,
                                                        cell_type = best_case_cell_cfg)
 
-                      nvsim_worst_case_input_cfg = nvmexplorer_src.input_defs.nvsim_interface.NVSimInputConfig(mem_cfg_file_path = worst_case_cfg_path, process_node = process_node,
+                      nvsim_worst_case_input_cfg = nvmexplorer_src.input_defs.nvsim_interface.NVSimInputConfig(exp_name = exp_name,
+                                                       mem_cfg_file_path = worst_case_cfg_path, 
+                                                       process_node = process_node,
                                                        opt_target = _opt_target,
                                                        word_width = word_width,
                                                        capacity = _capacity,
