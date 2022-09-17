@@ -1,0 +1,15 @@
+{"experiment": {
+    "exp_name":"googled_charlie",  
+    "read_frequency": 5025870,
+    "write_frequency": 2369630,
+    "read_size": 8,
+    "write_size": 8,
+    "working_set": 20096,
+    "cell_type":["SRAM"],
+    "opt_target":["ReadEDP"],
+    "capacity":[4],
+    "traffic":["dnn"],
+    "nvsim_path":"./nvmexplorer_src/nvsim_src/nvsim",
+    "output_path":"./output"
+}
+}  
